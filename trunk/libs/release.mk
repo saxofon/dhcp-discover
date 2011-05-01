@@ -34,7 +34,7 @@ ifeq "$(base)" "trunk"
 else ifeq "$(base)" "branches"
 	REL := $(PRJ)-$(base)-$(label)-$(shell svn info . | grep ^Revision: | cut -d" " -f2)
 else ifeq "$(base)" "tags"
-	REL := $(label)
+	REL := $(PRJ)-$(label)
 else
 	REL := invalid
 endif
@@ -42,14 +42,14 @@ endif
 RELTMP := $(shell mktemp -d)
 
 release-test:
-	echo "SVN_ROOT     : \"$(SVN_ROOT)\""
-	echo "PRJ          : \"$(PRJ)\""
-	echo "PRJ_SVN_PWD  : \"$(PRJ_SVN_PWD)\""
-	echo "parentdir    : \"$(parentdir)\""
-	echo "base         : \"$(base)\""
-	echo "label        : \"$(label)\""
-	echo "svn_offset   : \"$(svn_offset)\""
-	echo "REL          : \"$(REL)\""
+	@echo "SVN_ROOT     : \"$(SVN_ROOT)\""
+	@echo "PRJ          : \"$(PRJ)\""
+	@echo "PRJ_SVN_PWD  : \"$(PRJ_SVN_PWD)\""
+	@echo "parentdir    : \"$(parentdir)\""
+	@echo "base         : \"$(base)\""
+	@echo "label        : \"$(label)\""
+	@echo "svn_offset   : \"$(svn_offset)\""
+	@echo "REL          : \"$(REL)\""
 
 $(REL).tar.bz2:
 	svn export . $(RELTMP)/$(REL)
@@ -57,5 +57,11 @@ $(REL).tar.bz2:
 	mv $(RELTMP)/$(REL).tar.bz2 .
 	$(RM) -r $(RELTMP)
 
-release: $(REL).tar.bz2
+release-tarball: $(REL).tar.bz2
+
+release-tag:
+	@read -p "svn tag label : " svntag ; \
+	read -p "svn comment   : " svncomment ; \
+	svn copy $(PRJ_SVN_PWD) $(SVN_ROOT)/tags/$$svntag -m "$$svncomment"
+
 endif
