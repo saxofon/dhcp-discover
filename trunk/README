@@ -13,9 +13,10 @@ Howto build:
 
 Follow this little guide, if it is not obvious already:
 
-  1. Download dhcp-discover from sourceforge.net
-  2. Unpack tarball
-  3. make
+  1. Install dependencies, which is packages libnet-devel and libpcap-devel.
+  2. Download dhcp-discover from sourceforge.net
+  3. Unpack tarball
+  4. make
 
 You should now have a app called dhcp-discover where you did make.
 
