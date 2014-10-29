@@ -374,7 +374,7 @@ static void dump_dhcp_packet(struct libnet_dhcpv4_hdr *dhcp_hdr)
 			}
 			break;
 		case 5:
-			printf("  %16.16s      : %lu seconds\n",
+			printf("  %16.16s      : %u seconds\n",
 			       dot[entry].label,
 			       ntohl(*(uint32_t *) (options + 2)));
 			break;
