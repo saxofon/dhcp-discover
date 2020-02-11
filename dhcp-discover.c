@@ -190,7 +190,7 @@ static int dhcp_discovery(libnet_t *ln, uint8_t *enet_src, uint32_t dhcp_xid)
 	uint8_t options_req[] = {
 		LIBNET_DHCP_SUBNETMASK, LIBNET_DHCP_BROADCASTADDR,
 		LIBNET_DHCP_ROUTER, LIBNET_DHCP_DOMAINNAME, LIBNET_DHCP_DNS,
-		LIBNET_DHCP_HOSTNAME, LIBNET_DHCP_TIMEOFFSET
+		LIBNET_DHCP_HOSTNAME, LIBNET_DHCP_TIMEOFFSET, LIBNET_DHCP_ROOTPATH
 	};
 
 	/* build DHCP Discovery options packet */
@@ -495,7 +495,7 @@ int main(int argc, char *argv[])
 	sprintf(filter_string, "ether host ff:ff:ff:ff:ff:ff or "
 		"ether host %2.2x:%2.2x:%2.2x:%2.2x:%2.2x:%2.2x",
 		enet_src[0], enet_src[1], enet_src[2], enet_src[3],
-		enet_src[4], enet_src[5], enet_src[6], enet_src[7]);
+		enet_src[4], enet_src[5]);
 	pc = setup_libpcap(enet_intf, filter_string);
 
 	/* send dhcp discovery message */
