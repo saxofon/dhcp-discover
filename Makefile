@@ -7,11 +7,11 @@ SRCS=$(shell ls *\.c)
 OBJS=$(subst .c,.o,$(SRCS))
 APPS=$(subst .c,,$(SRCS))
 
-CFLAGS += $(shell libnet-config --cflags --defines)
+CFLAGS += $(shell libnet-config --cflags)
 LDLIBS += $(shell libnet-config --libs)
 
-CFLAGS += $(shell pcap-config --cflags --defines)
-LDLIBS += $(shell pcap-config --libs)
+CFLAGS += $(shell pkg-config --cflags libpcap)
+LDLIBS += $(shell pkg-config --libs libpcap)
 
 #LDFLAGS += -static
 
