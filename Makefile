@@ -7,13 +7,7 @@ SRCS=$(shell ls *\.c)
 OBJS=$(subst .c,.o,$(SRCS))
 APPS=$(subst .c,,$(SRCS))
 
-CFLAGS += $(shell libnet-config --cflags --defines)
-LDLIBS += $(shell libnet-config --libs)
-
-CFLAGS += $(shell pcap-config --cflags --defines)
-LDLIBS += $(shell pcap-config --libs)
-
-#LDFLAGS += -static
+LDLIBS += -lnet -lpcap
 
 all: $(APPS)
 
@@ -21,7 +15,8 @@ include libs/release.mk
 include libs/sourceforge.mk
 
 install:
-	cp $(APPS) /usr/bin
+	mkdir -p $(DESTDIR)/usr/bin
+	cp $(APPS) $(DESTDIR)/usr/bin
 
 clean:
 	$(RM) $(APPS)
