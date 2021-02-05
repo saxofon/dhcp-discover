@@ -156,7 +156,7 @@ static pcap_t *setup_libpcap(char *intf, char *filter_string)
 	pcap_t *pc = NULL;
 	struct bpf_program filter_code;
 
-	pc = pcap_open_live(intf, 1500, 1, 0, pc_errbuf);
+	pc = pcap_open_live(intf, 65565, 1, 0, pc_errbuf);
 	if (!pc) {
 		fprintf(stderr, "pcap_open_live() failed: %s", pc_errbuf);
 		exit(EXIT_FAILURE);
