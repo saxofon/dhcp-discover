@@ -17,3 +17,6 @@ jobs:
       - name: build
         run: make
   
+      - name: test
+        run: sudo ./dhcp-discover -i $(route -n | grep '^0.0.0.0' | grep -o '[^ ]*$')
+  
