@@ -11,9 +11,6 @@ LDLIBS += -lnet -lpcap
 
 all: $(APPS)
 
-include libs/release.mk
-include libs/sourceforge.mk
-
 install:
 	mkdir -p $(DESTDIR)/usr/bin
 	cp $(APPS) $(DESTDIR)/usr/bin

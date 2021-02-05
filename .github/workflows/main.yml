@@ -1,0 +1,16 @@
+name: main
+on: push
+
+jobs:
+  build:
+    name: Build-n-stuff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: install dependency libnet
+        run: apt install libnet1-dev
+      - name: install dependency libpcap
+        run: apt install libpcap-dev
+      - name: build
+        run: make
+  
